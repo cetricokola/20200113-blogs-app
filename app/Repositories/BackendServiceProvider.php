@@ -7,11 +7,20 @@ use Illuminate\Support\ServiceProvider;
 class BackendServiceProvider extends ServiceProvider
 {
 
-    public function register()
+    public
+    function register()
     {
-        $this->app->bind(
-            'App\Repositories\BlogRepositoryInterface',
-            'App\Repositories\BlogRepository'
-        );
+        $this->registerBlogRepo();
+        $this->registerCommentRepo();
+
+    }
+    public function registerCommentRepo()
+    {
+        return $this->app->bind('App\Repositories\CommentBlogsInterface', 'App\Repositories\CommentBlogRepository');
+    }
+
+    public function registerBlogRepo()
+    {
+        return $this->app->bind('App\Repositories\BlogRepositoryInterface', 'App\Repositories\BlogRepository');
     }
 }
